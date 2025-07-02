@@ -17,6 +17,15 @@
                 {
                     "name": "Aim",
                     "type": "Value",
+                    "id": "b28df981-ae62-4607-8ded-4e47dbbf1a9e",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Shoot",
+                    "type": "Value",
                     "id": "79888f6f-163b-48e4-b2fa-82773f9e0352",
                     "expectedControlType": "Vector2",
                     "processors": "",
@@ -40,7 +49,18 @@
                     "name": "",
                     "id": "dd39b57f-553a-4755-a5dd-21a48c8a8e3c",
                     "path": "<Gamepad>/rightStick",
-                    "interactions": "Hold",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": ";Mobile",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "189df516-6d26-4fe4-9fc9-f710cf172a29",
+                    "path": "<Gamepad>/rightStick",
+                    "interactions": "",
                     "processors": "",
                     "groups": ";Mobile",
                     "action": "Aim",

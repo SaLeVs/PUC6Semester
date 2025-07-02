@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Interactions;
 using static PlayerControls;
 
 public class InputReader : ScriptableObject, IPlayerActions
@@ -23,26 +24,31 @@ public class InputReader : ScriptableObject, IPlayerActions
         playerControls.Player.Enable();
     }
 
-    public void OnAim(InputAction.CallbackContext context)
-    {
-        OnAimEvent?.Invoke(context.ReadValue<Vector2>());
-
-        if(context.performed)
-        {
-            Debug.Log("Shoot performed");
-            OnShootEvent?.Invoke(true);
-        }
-        else if (context.canceled)
-        {
-            Debug.Log("Shoot canceled");
-            OnShootEvent?.Invoke(false);
-        }
-    }
-
     public void OnMove(InputAction.CallbackContext context)
     {
         OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
     }
+
+    public void OnAim(InputAction.CallbackContext context)
+    {
+        OnAimEvent?.Invoke(context.ReadValue<Vector2>());
+    }
+
+    public void OnShoot(InputAction.CallbackContext context)
+    {
+        // Logic for Handle shoot, is a interaction on Input action
+        if (context.started)
+        {
+            Debug.Log("Shoot called");
+            OnShootEvent?.Invoke(true);
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("Shoot cancelled");
+            OnShootEvent?.Invoke(false);
+        }
+    }
+
 
     private void OnDestroy()
     {

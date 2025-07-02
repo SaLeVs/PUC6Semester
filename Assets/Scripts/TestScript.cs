@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 public class TestScript : MonoBehaviour
 {
     [SerializeField] private InputReader inputReader;
-
+    private bool isShooting;
     private void Start()
     {
         inputReader.OnMoveEvent += InputReader_Move;
@@ -20,7 +20,16 @@ public class TestScript : MonoBehaviour
 
     private void InputReader_Shoot(bool isShoot)
     {
-        Debug.Log($"Shoot event: {isShoot}");
+        if (isShoot)
+        {
+            isShooting = true;
+            //Debug.Log("Shooting started");
+        }
+        else
+        {
+            isShooting = false;
+            //Debug.Log("Shooting stopped");
+        }
     }
 
     private void InputReader_Move(Vector2 movement)
@@ -31,5 +40,7 @@ public class TestScript : MonoBehaviour
     private void OnDestroy()
     {
         inputReader.OnMoveEvent -= InputReader_Move;
+        inputReader.OnShootEvent -= InputReader_Shoot;
+        inputReader.OnAimEvent -= InputReader_Aim;
     }
 }
