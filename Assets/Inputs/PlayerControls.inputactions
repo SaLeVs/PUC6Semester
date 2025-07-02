@@ -22,15 +22,6 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
-                },
-                {
-                    "name": "Shoot",
-                    "type": "Button",
-                    "id": "50afdb4f-430e-445e-aa37-514b36a5382b",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -49,21 +40,10 @@
                     "name": "",
                     "id": "dd39b57f-553a-4755-a5dd-21a48c8a8e3c",
                     "path": "<Gamepad>/rightStick",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": ";Mobile",
                     "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "4b0f5040-27d6-4684-989d-8a36495644ad",
-                    "path": "<Gamepad>/rightStickPress",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": ";Mobile",
-                    "action": "Shoot",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

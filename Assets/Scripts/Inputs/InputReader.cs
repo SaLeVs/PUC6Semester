@@ -26,23 +26,22 @@ public class InputReader : ScriptableObject, IPlayerActions
     public void OnAim(InputAction.CallbackContext context)
     {
         OnAimEvent?.Invoke(context.ReadValue<Vector2>());
+
+        if(context.performed)
+        {
+            Debug.Log("Shoot performed");
+            OnShootEvent?.Invoke(true);
+        }
+        else if (context.canceled)
+        {
+            Debug.Log("Shoot canceled");
+            OnShootEvent?.Invoke(false);
+        }
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
         OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
-    }
-
-    public void OnShoot(InputAction.CallbackContext context)
-    {
-        if(context.performed)
-        {
-            OnShootEvent?.Invoke(true);
-        }
-        else if(context.canceled)
-        {
-            OnShootEvent?.Invoke(false);
-        }
     }
 
     private void OnDestroy()

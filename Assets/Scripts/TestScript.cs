@@ -1,10 +1,10 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class TestScript : MonoBehaviour
 {
     [SerializeField] private InputReader inputReader;
-
 
     private void Start()
     {
@@ -20,7 +20,7 @@ public class TestScript : MonoBehaviour
 
     private void InputReader_Shoot(bool isShoot)
     {
-        Debug.Log($"Shot event: {isShoot}");
+        Debug.Log($"Shoot event: {isShoot}");
     }
 
     private void InputReader_Move(Vector2 movement)
