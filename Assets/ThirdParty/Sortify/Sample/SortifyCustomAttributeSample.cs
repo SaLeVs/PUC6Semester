@@ -50,7 +50,7 @@ namespace Sortify
         [Space(5)]
 
         [Tag]
-        public string tag;
+        public string customTag;
         [Layer]
         public int layer;
 
