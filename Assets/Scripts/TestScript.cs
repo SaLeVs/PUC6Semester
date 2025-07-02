@@ -11,7 +11,7 @@ public class TestScript : MonoBehaviour
         inputReader.OnMoveEvent += InputReader_Move;
     }
 
-    private void InputReader_Move(Vector3 movement)
+    private void InputReader_Move(Vector2 movement)
     {
         Debug.Log($"Move event triggered with vector: {movement}");
     }

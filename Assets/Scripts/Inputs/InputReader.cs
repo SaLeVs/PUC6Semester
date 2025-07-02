@@ -6,8 +6,8 @@ using static PlayerControls;
 public class InputReader : ScriptableObject, IPlayerActions
 {
     public event Action<bool> OnShootEvent;
-    public event Action<Vector3> OnMoveEvent;
-    public event Action<Vector3> OnAimEvent;
+    public event Action<Vector2> OnMoveEvent;
+    public event Action<Vector2> OnAimEvent;
 
     private PlayerControls playerControls;
     
@@ -25,12 +25,12 @@ public class InputReader : ScriptableObject, IPlayerActions
 
     public void OnAim(InputAction.CallbackContext context)
     {
-        OnAimEvent?.Invoke(context.ReadValue<Vector3>());
+        OnAimEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnMove(InputAction.CallbackContext context)
     {
-        OnMoveEvent?.Invoke(context.ReadValue<Vector3>());
+        OnMoveEvent?.Invoke(context.ReadValue<Vector2>());
     }
 
     public void OnShoot(InputAction.CallbackContext context)
