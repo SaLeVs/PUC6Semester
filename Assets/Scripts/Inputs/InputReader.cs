@@ -48,13 +48,16 @@ public class InputReader : ScriptableObject, IPlayerActions
     }
 
 
-    private void OnDestroy()
+    private void OnDisable()
     {
         if (playerControls != null)
         {
             playerControls.Player.Disable();
             playerControls.Player.SetCallbacks(null);
+            // playerControls.Dispose();
             playerControls = null;
+
         }
     }
+    
 }

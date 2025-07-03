@@ -6,6 +6,7 @@ public class PlayerMovement : NetworkBehaviour
 {
     [BetterHeader("References")]
     [SerializeField] private InputReader inputReader;
+    [SerializeField] private Rigidbody rb;
 
     [Space(10)]
 
@@ -31,10 +32,10 @@ public class PlayerMovement : NetworkBehaviour
     }
 
 
-    private void Update()
+    private void FixedUpdate()
     {
         Vector3 moveDirection = new Vector3(movementInput.x, 0f, movementInput.y);
-        transform.position += movementSpeed * Time.deltaTime * moveDirection;
+        rb.MovePosition(rb.position + movementSpeed * Time.fixedDeltaTime * moveDirection);
     }
 
 

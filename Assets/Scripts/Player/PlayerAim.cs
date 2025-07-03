@@ -8,6 +8,7 @@ public class PlayerAim : NetworkBehaviour
 {
     [BetterHeader("References")]
     [SerializeField] private InputReader inputReader;
+    [SerializeField] private Rigidbody rb;
 
     [Space(10)]
 
@@ -33,7 +34,7 @@ public class PlayerAim : NetworkBehaviour
 
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if(aimInput != Vector2.zero)
         {
@@ -43,7 +44,7 @@ public class PlayerAim : NetworkBehaviour
             // Debug.Log($"targetYaw: {targetYaw}, InputX: {previousAimInput.x}, InputY: {previousAimInput.y} MathfRad2Deg: {Mathf.Rad2Deg}");
 
             Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+            rb.MoveRotation(Quaternion.RotateTowards(rb.rotation, targetRotation, aimSpeed * Time.fixedDeltaTime));
         }
     }
 
