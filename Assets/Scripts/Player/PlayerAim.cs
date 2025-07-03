@@ -1,8 +1,9 @@
 using Sortify;
+using System.Globalization;
 using Unity.Netcode;
 using UnityEngine;
 
-public class PlayerMovement : NetworkBehaviour
+public class PlayerAim : NetworkBehaviour
 {
     [BetterHeader("References")]
     [SerializeField] private InputReader playerInputs;
@@ -12,10 +13,9 @@ public class PlayerMovement : NetworkBehaviour
     [Space(10)]
 
     [BetterHeader("Settings")]
-    [SerializeField] private float movementSpeed;
+    [SerializeField] private float aimSpeed;
 
 
-    private Vector2 previousMovementInput;
     private Vector2 previousAimInput;
 
 
@@ -23,21 +23,20 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        playerInputs.OnMoveEvent += PlayerInputs_OnMoveEvent;
+        playerInputs.OnAimEvent += PlayerInputs_OnAimEvent;
 
     }
 
 
-    private void PlayerInputs_OnMoveEvent(Vector2 movementInput)
+    private void PlayerInputs_OnAimEvent(Vector2 aimInput)
     {
-        previousMovementInput = movementInput;
-        
-    }
+        previousAimInput = aimInput;
 
+    }
 
     private void FixedUpdate()
     {
-        playerRigidbody.MovePosition(new Vector3(previousMovementInput.x, 0f, previousMovementInput.y).normalized * movementSpeed * Time.fixedDeltaTime);
+
     }
 
 
@@ -45,7 +44,8 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        playerInputs.OnMoveEvent -= PlayerInputs_OnMoveEvent;
+        playerInputs.OnAimEvent -= PlayerInputs_OnAimEvent;
 
     }
+
 }
