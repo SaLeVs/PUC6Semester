@@ -36,6 +36,8 @@ public class PlayerAim : NetworkBehaviour
 
     private void FixedUpdate()
     {
+        if (!IsOwner) return; 
+
         if(aimInput != Vector2.zero)
         {
             Vector3 aimDirection = new Vector3(0f, aimInput.x, 0f);

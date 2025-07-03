@@ -31,9 +31,10 @@ public class PlayerMovement : NetworkBehaviour
         this.movementInput = movementInput.normalized;
     }
 
-
     private void FixedUpdate()
     {
+        if (!IsOwner) return;
+
         Vector3 moveDirection = new Vector3(movementInput.x, 0f, movementInput.y);
         rb.MovePosition(rb.position + movementSpeed * Time.fixedDeltaTime * moveDirection);
     }
