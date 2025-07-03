@@ -2,6 +2,7 @@ using Sortify;
 using System.Globalization;
 using Unity.Netcode;
 using UnityEngine;
+using UnityEngine.Windows;
 
 public class PlayerAim : NetworkBehaviour
 {
@@ -32,9 +33,18 @@ public class PlayerAim : NetworkBehaviour
 
     }
 
-    private void FixedUpdate()
+    private void Update()
     {
+        if(previousAimInput != Vector2.zero)
+        {
+            Vector3 aimDir = new Vector3(0f, previousAimInput.x, 0f);
 
+            float targetYaw = Mathf.Atan2(previousAimInput.x, previousAimInput.y) * Mathf.Rad2Deg;
+            // Debug.Log($"targetYaw: {targetYaw}, InputX: {previousAimInput.x}, InputY: {previousAimInput.y} MathfRad2Deg: {Mathf.Rad2Deg}");
+
+            Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, targetRotation, aimSpeed * Time.deltaTime);
+        }
     }
 
 
