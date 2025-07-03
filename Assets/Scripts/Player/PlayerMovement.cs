@@ -15,6 +15,7 @@ public class PlayerMovement : NetworkBehaviour
 
 
     private Vector2 movementInput;
+    private Vector2 serverMovementInput;
 
 
     public override void OnNetworkSpawn()
@@ -29,14 +30,24 @@ public class PlayerMovement : NetworkBehaviour
     private void PlayerInputs_OnMoveEvent(Vector2 movementInput)
     {
         this.movementInput = movementInput.normalized;
+        SendInputToServerRpc(this.movementInput);
+
+    }
+
+    [Rpc(SendTo.Server, RequireOwnership = false)]
+    private void SendInputToServerRpc(Vector2 movementInput)
+    {
+        serverMovementInput = movementInput;
+
     }
 
     private void FixedUpdate()
     {
-        if (!IsOwner) return;
+        if (!IsServer) return;
 
-        Vector3 moveDirection = new Vector3(movementInput.x, 0f, movementInput.y);
+        Vector3 moveDirection = new Vector3(serverMovementInput.x, 0f, serverMovementInput.y);
         rb.MovePosition(rb.position + movementSpeed * Time.fixedDeltaTime * moveDirection);
+
     }
 
 
