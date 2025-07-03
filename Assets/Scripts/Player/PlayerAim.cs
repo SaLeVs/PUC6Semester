@@ -7,8 +7,6 @@ public class PlayerAim : NetworkBehaviour
 {
     [BetterHeader("References")]
     [SerializeField] private InputReader playerInputs;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Rigidbody playerRigidbody;
 
     [Space(10)]
 

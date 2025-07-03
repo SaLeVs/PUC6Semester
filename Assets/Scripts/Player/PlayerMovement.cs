@@ -6,8 +6,6 @@ public class PlayerMovement : NetworkBehaviour
 {
     [BetterHeader("References")]
     [SerializeField] private InputReader playerInputs;
-    [SerializeField] private Transform playerTransform;
-    [SerializeField] private Rigidbody playerRigidbody;
 
     [Space(10)]
 
@@ -16,7 +14,6 @@ public class PlayerMovement : NetworkBehaviour
 
 
     private Vector2 previousMovementInput;
-    private Vector2 previousAimInput;
 
 
     public override void OnNetworkSpawn()
@@ -30,14 +27,14 @@ public class PlayerMovement : NetworkBehaviour
 
     private void PlayerInputs_OnMoveEvent(Vector2 movementInput)
     {
-        previousMovementInput = movementInput;
-        
+        previousMovementInput = movementInput.normalized;
     }
 
 
-    private void FixedUpdate()
+    private void Update()
     {
-        playerRigidbody.MovePosition(new Vector3(previousMovementInput.x, 0f, previousMovementInput.y).normalized * movementSpeed * Time.fixedDeltaTime);
+        Vector3 moveDirection = new Vector3(previousMovementInput.x, 0f, previousMovementInput.y);
+        transform.position += movementSpeed * Time.deltaTime * moveDirection;
     }
 
 
