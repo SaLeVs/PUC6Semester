@@ -39,12 +39,10 @@ public class InputReader : ScriptableObject, IPlayerActions
         // Logic for Handle shoot, is a interaction on Input action
         if (context.started)
         {
-            Debug.Log("Shoot called");
             OnShootEvent?.Invoke(true);
         }
         else if (context.canceled)
         {
-            Debug.Log("Shoot cancelled");
             OnShootEvent?.Invoke(false);
         }
     }

@@ -23,6 +23,10 @@
                 {
                     "objID": "GameTest_CANVASES_5",
                     "styleType": 1
+                },
+                {
+                    "objID": "GameTest_ENVORIMENT_7",
+                    "styleType": 1
                 }
             ],
             "showComponents": [],
