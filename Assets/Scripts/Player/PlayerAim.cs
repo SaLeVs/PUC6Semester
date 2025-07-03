@@ -7,7 +7,7 @@ using UnityEngine.Windows;
 public class PlayerAim : NetworkBehaviour
 {
     [BetterHeader("References")]
-    [SerializeField] private InputReader playerInputs;
+    [SerializeField] private InputReader inputReader;
 
     [Space(10)]
 
@@ -15,31 +15,31 @@ public class PlayerAim : NetworkBehaviour
     [SerializeField] private float aimSpeed;
 
 
-    private Vector2 previousAimInput;
+    private Vector2 aimInput;
 
 
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
 
-        playerInputs.OnAimEvent += PlayerInputs_OnAimEvent;
+        inputReader.OnAimEvent += PlayerInputs_OnAimEvent;
 
     }
 
 
     private void PlayerInputs_OnAimEvent(Vector2 aimInput)
     {
-        previousAimInput = aimInput;
+        this.aimInput = aimInput;
 
     }
 
     private void Update()
     {
-        if(previousAimInput != Vector2.zero)
+        if(aimInput != Vector2.zero)
         {
-            Vector3 aimDir = new Vector3(0f, previousAimInput.x, 0f);
+            Vector3 aimDirection = new Vector3(0f, aimInput.x, 0f);
 
-            float targetYaw = Mathf.Atan2(previousAimInput.x, previousAimInput.y) * Mathf.Rad2Deg;
+            float targetYaw = Mathf.Atan2(aimInput.x, aimInput.y) * Mathf.Rad2Deg;
             // Debug.Log($"targetYaw: {targetYaw}, InputX: {previousAimInput.x}, InputY: {previousAimInput.y} MathfRad2Deg: {Mathf.Rad2Deg}");
 
             Quaternion targetRotation = Quaternion.Euler(0f, targetYaw, 0f);
@@ -52,7 +52,7 @@ public class PlayerAim : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        playerInputs.OnAimEvent -= PlayerInputs_OnAimEvent;
+        inputReader.OnAimEvent -= PlayerInputs_OnAimEvent;
 
     }
 

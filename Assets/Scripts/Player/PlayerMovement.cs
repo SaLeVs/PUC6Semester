@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : NetworkBehaviour
 {
     [BetterHeader("References")]
-    [SerializeField] private InputReader playerInputs;
+    [SerializeField] private InputReader inputReader;
 
     [Space(10)]
 
@@ -13,27 +13,27 @@ public class PlayerMovement : NetworkBehaviour
     [SerializeField] private float movementSpeed;
 
 
-    private Vector2 previousMovementInput;
+    private Vector2 movementInput;
 
 
     public override void OnNetworkSpawn()
     {
         if (!IsOwner) return;
 
-        playerInputs.OnMoveEvent += PlayerInputs_OnMoveEvent;
+        inputReader.OnMoveEvent += PlayerInputs_OnMoveEvent;
 
     }
 
 
     private void PlayerInputs_OnMoveEvent(Vector2 movementInput)
     {
-        previousMovementInput = movementInput.normalized;
+        this.movementInput = movementInput.normalized;
     }
 
 
     private void Update()
     {
-        Vector3 moveDirection = new Vector3(previousMovementInput.x, 0f, previousMovementInput.y);
+        Vector3 moveDirection = new Vector3(movementInput.x, 0f, movementInput.y);
         transform.position += movementSpeed * Time.deltaTime * moveDirection;
     }
 
@@ -42,7 +42,7 @@ public class PlayerMovement : NetworkBehaviour
     {
         if (!IsOwner) return;
 
-        playerInputs.OnMoveEvent -= PlayerInputs_OnMoveEvent;
+        inputReader.OnMoveEvent -= PlayerInputs_OnMoveEvent;
 
     }
 }
