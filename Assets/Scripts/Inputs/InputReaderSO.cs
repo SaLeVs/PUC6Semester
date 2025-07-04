@@ -4,7 +4,7 @@ using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Interactions;
 using static PlayerControls;
 
-public class InputReader : ScriptableObject, IPlayerActions
+public class InputReaderSO : ScriptableObject, IPlayerActions
 {
     public event Action<bool> OnShootEvent;
     public event Action<Vector2> OnMoveEvent;

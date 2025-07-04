@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : NetworkBehaviour
 {
     [BetterHeader("References")]
-    [SerializeField] private InputReader inputReader;
+    [SerializeField] private InputReaderSO inputReader;
     [SerializeField] private Rigidbody rb;
 
     [Space(10)]

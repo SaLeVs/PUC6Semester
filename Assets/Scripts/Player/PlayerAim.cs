@@ -7,7 +7,7 @@ using UnityEngine.Windows;
 public class PlayerAim : NetworkBehaviour
 {
     [BetterHeader("References")]
-    [SerializeField] private InputReader inputReader;
+    [SerializeField] private InputReaderSO inputReader;
     [SerializeField] private Rigidbody rb;
 
     [Space(10)]
